@@ -2,12 +2,10 @@ package com.github.tarao
 package collection
 package relation
 
-import scala.collection.{breakOut, IterableLike}
-import scala.collection.generic.CanBuildFrom
 import scala.language.{higherKinds, implicitConversions}
 
 /** A class to describe a join of two sequences. */
-case class Join[A, B, K, It[X] <: IterableLike[X, It[X]]](
+case class Join[A, B, K, It[X] <: IterableLike[X, It, It[X]]](
   left: It[A],
   right: Iterable[B],
   leftKey: A => K,
@@ -16,13 +14,15 @@ case class Join[A, B, K, It[X] <: IterableLike[X, It[X]]](
 ) {
   private type R = (A, B)
 
-  private def applyTo[It2[X] <: IterableLike[X, It2[X]], R2, That](
+  private def applyTo[It2[X] <: IterableLike[X, It2, It2[X]], R2](
     f: R => R2,
     s: It2[A]
-  )(implicit bf: CanBuildFrom[It2[A], R2, That]): That = {
+  )(implicit
+    bf: CanBuildFrom[It2[A], R2, It2[R2]]
+  ): It2[R2] = {
     val m = {
       val m: Map[K, Option[B]] =
-        right.map(x => rightKey(x) -> Some(x))(breakOut)
+        right.view.map(x => rightKey(x) -> Some(x)).toMap
       m.withDefault(default)
     }
     s.flatMap(x => m(leftKey(x)).map(y => f((x, y))))
@@ -35,10 +35,10 @@ case class Join[A, B, K, It[X] <: IterableLike[X, It[X]]](
   def result(implicit bf: CanBuildFrom[It[A], R, It[R]]): It[R] =
     applyTo(identity, left)
 
-  def toStream: Stream[R] = applyTo(identity, left.toStream)(breakOut)
+  def toStream: Stream[R] = applyTo(identity, left.toStream)
 }
 object Join {
-  class Inner[A, B, It[X] <: IterableLike[X, It[X]]](
+  class Inner[A, B, It[X] <: IterableLike[X, It, It[X]]](
     left: It[A],
     right: Iterable[B]
   ) {
@@ -48,7 +48,7 @@ object Join {
     ): Join[A, B, K, It] = Join(left, right, leftKey, rightKey, _ => None)
   }
 
-  class Left[A, B, It[X] <: IterableLike[X, It[X]]](
+  class Left[A, B, It[X] <: IterableLike[X, It, It[X]]](
     left: It[A],
     right: Iterable[B]
   ) {
@@ -58,7 +58,7 @@ object Join {
     ): Left.On[A, B, K, It] = Left.On(left, right, leftKey, rightKey)
   }
   object Left {
-    case class On[A, B, K, It[X] <: IterableLike[X, It[X]]](
+    case class On[A, B, K, It[X] <: IterableLike[X, It, It[X]]](
       left: It[A],
       right: Iterable[B],
       leftKey: A => K,
@@ -75,7 +75,7 @@ object Join {
     }
   }
 
-  implicit def toStream[A, B, K, It[X] <: IterableLike[X, It[X]], Col](
+  implicit def toStream[A, B, K, It[X] <: IterableLike[X, It, It[X]]](
     join: Join[A, B, K, It]
   ): Stream[(A, B)] = join.toStream
 }
