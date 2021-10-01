@@ -58,11 +58,11 @@ import collection.Implicits.IterableOps
   * `Cursor.factory.beginning`.
   *
   * @see [[com.github.tarao.collection.Cursor]]
-  * @see [[scala.collection.immutable.Stream]]
+  * @see [[scala.collection.immutable.LazyList]]
   */
 trait Refill[A, C] {
   def mapStream[B](
-    f: Stream[(A, Cursor[C, _])] => Stream[(B, Cursor[C, _])]
+    f: LazyList[(A, Cursor[C, _])] => LazyList[(B, Cursor[C, _])]
   ): Refill[B, C]
 
   def take(n: Refill.Limit): Seq[A]
@@ -109,7 +109,7 @@ object Refill {
     upcast: T <:< U
   ): Refill[T, C] = {
     var next: Option[Cursor[C, U]] = Some(from)
-    val s = Stream.continually { next.map { cursor =>
+    val s = LazyList.continually { next.map { cursor =>
       val v = cursor.factory.zip(block(chunkSize + 1, cursor.value))
       next = v.drop(chunkSize).headOption.map(_._2)
       v.take(chunkSize)
@@ -133,10 +133,10 @@ object Refill {
     })(identity)
   }
 
-  private class Result[A, C](stream: Stream[(A, Cursor[C, _])], beginning: C)
+  private class Result[A, C](stream: LazyList[(A, Cursor[C, _])], beginning: C)
       extends Refill[A, C] {
     def mapStream[B](
-      f: Stream[(A, Cursor[C, _])] => Stream[(B, Cursor[C, _])]
+      f: LazyList[(A, Cursor[C, _])] => LazyList[(B, Cursor[C, _])]
     ): Refill[B, C] = new Result(f(stream), beginning)
 
     def take(n: Refill.Limit): Seq[A] = stream.map(_._1).take(n)
@@ -161,7 +161,7 @@ object Refill {
       conv(refill(from, chunkSize)(block))
 
     def mapStream[B](
-      f: Stream[(R, Cursor[C, _])] => Stream[(B, Cursor[C, _])]
+      f: LazyList[(R, Cursor[C, _])] => LazyList[(B, Cursor[C, _])]
     ): Refill[B, C] =
       new Lazy(from, block, reserve)(conv.andThen(_.mapStream(f)))
 

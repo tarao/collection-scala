@@ -2,14 +2,12 @@ package com.github.tarao
 package collection
 
 import collection.relation.Join
-import scala.collection.IterableLike
-import scala.collection.generic.CanBuildFrom
 import scala.language.higherKinds
 
 object Implicits {
   import scala.language.implicitConversions
 
-  implicit def IterableOps[ItLike, A, It[X] <: IterableLike[X, It[X]]](
+  implicit def IterableOps[ItLike, A, It[X] <: IterableLike[X, It, It[X]]](
     it: ItLike
   )(implicit toIt: ItLike => It[A]): IterableOps[A, It] =
     new IterableOps(toIt(it))
@@ -17,7 +15,7 @@ object Implicits {
   // This cannot be an implicit class since we need an implicit
   // paramter `ItLike => It[A]` and the class cannot be `AnyVal` with
   // the parameter.
-  protected class IterableOps[A, It[X] <: IterableLike[X, It[X]]](
+  protected class IterableOps[A, It[X] <: IterableLike[X, It, It[X]]](
     private val it: It[A]
   ) extends AnyVal {
     /** Builds a new sequence from this sequence without any duplications
@@ -62,8 +60,8 @@ object Implicits {
       *   // res0: Vector[(String, Int)] = Vector((d,4), (a,1), (c,3))
       * }}}
       */
-    def orderBy[B](ordered: Seq[B])(implicit keyOf: A => B): Stream[A] =
-      ordered.join(it.toIterable).on(identity, keyOf).map(_._2)
+    def orderBy[B](ordered: Seq[B])(implicit keyOf: A => B): LazyList[A] =
+      ordered.join(it.toIterable).on(identity(_), keyOf).map(_._2)
 
     /** Reorder this sequence according to another sequence and a mapping
       * of element types.
@@ -94,7 +92,7 @@ object Implicits {
       *   // res0: Vector[(String, Int)] = Vector((d,4), (_,5), (a,1), (c,3))
       * }}}
       */
-    def totallyOrderBy[B](ordered: Seq[B])(default: B => A)(implicit keyOf: A => B): Stream[A] =
+    def totallyOrderBy[B](ordered: Seq[B])(default: B => A)(implicit keyOf: A => B): LazyList[A] =
       ordered.leftJoin(it.toIterable).on(identity, keyOf)(default).map(_._2)
 
     /** Make (inner) join of this sequence and another sequence.
@@ -132,11 +130,11 @@ object Implicits {
       *   }
       *
       *   locally {
-      *     // You can call any `Stream` method on the result:
+      *     // You can call any `LazyList` method on the result:
       *     val s = s1.join(s2).on(_._2, _._1).map { case (a, b) =>
       *       s"\${a._1}:\${b._2}"
       *     }
-      *     // s: scala.collection.immutable.Stream[String] = Stream(a:1, ?)
+      *     // s: scala.collection.immutable.LazyList[String] = LazyList(a:1, ?)
       *   }
       * }}}
       */
@@ -179,29 +177,29 @@ object Implicits {
       *   }
       *
       *   locally {
-      *     // You can call any `Stream` method on the result:
+      *     // You can call any `LazyList` method on the result:
       *     val s = s1.leftJoin(s2).on(_._2, _._1)(0 -> 0).map { case (a, b) =>
       *       s"\${a._1}:\${b._2}"
       *     }
-      *     // s: scala.collection.immutable.Stream[String] = Stream(a:1, ?)
+      *     // s: scala.collection.immutable.LazyList[String] = LazyList(a:1, ?)
       *   }
       * }}}
       */
     def leftJoin[B](other: Iterable[B]): Join.Left[A, B, It] =
       new Join.Left(it, other)
 
-    def split[L, R, LL, RR](implicit
+    def split[L, R, C](implicit
       eitherOf: A <:< Either[L, R],
-      bfl: CanBuildFrom[It[L], L, LL],
-      bfr: CanBuildFrom[It[R], R, RR]
-    ): (LL, RR) = {
-      val ls = bfl()
-      val rs = bfr()
+      bfl: BuildFrom[It[A], L, It[L]],
+      bfr: BuildFrom[It[A], R, It[R]],
+    ): (It[L], It[R]) = {
+      val ls = bfl.newBuilder(it)
+      val rs = bfr.newBuilder(it)
       it.foreach { x => eitherOf(x) match {
         case Left(l)  => ls += l
         case Right(r) => rs += r
       } }
-      (ls.result, rs.result)
+      (ls.result(), rs.result())
     }
   }
 }

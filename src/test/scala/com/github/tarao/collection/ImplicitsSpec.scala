@@ -155,7 +155,8 @@ class ImplicitsSpec extends AnyFunSpec
             }
 
             locally {
-              val s1 = Vector("a" -> 1, "b" -> 2, "c" -> 3, "d" -> 4).toIterable
+              val s1: Iterable[(String, Int)] =
+                Vector("a" -> 1, "b" -> 2, "c" -> 3, "d" -> 4).toIterable
               val s2 = Seq(2 -> 4, 4 -> 16, 1 -> 1, 3 -> 9)
 
               val s3 = s1.join(s2).on(_._2, _._1).into { case (a, b) =>
@@ -167,7 +168,7 @@ class ImplicitsSpec extends AnyFunSpec
           }
         }
 
-        describe("Stream methods") {
+        describe("LazyList methods") {
           it("should join two lists by some key") {
             val s1 = Seq("a" -> 1, "b" -> 2, "c" -> 3, "d" -> 4)
             val s2 = Seq(2 -> 4, 4 -> 16, 1 -> 1, 3 -> 9)
@@ -175,7 +176,7 @@ class ImplicitsSpec extends AnyFunSpec
             val s3 = s1.join(s2).on(_._2, _._1).map { case (a, b) =>
               (a._1, b._2)
             }
-            s3.isTypeOf[Stream[(String, Int)]]
+            s3.isTypeOf[LazyList[(String, Int)]]
             s3 shouldBe Seq("a" -> 1, "b" -> 4, "c" -> 9, "d" -> 16)
           }
 
@@ -186,7 +187,7 @@ class ImplicitsSpec extends AnyFunSpec
             val s3 = s1.join(s2).on(_._2, _._1).map { case (a, b) =>
               (a._1, b._2)
             }
-            s3.isTypeOf[Stream[(String, Int)]]
+            s3.isTypeOf[LazyList[(String, Int)]]
             s3 shouldBe Seq("a" -> 1, "c" -> 9, "d" -> 16)
           }
 
@@ -203,7 +204,7 @@ class ImplicitsSpec extends AnyFunSpec
               called += a._1
               (a._1, b._2)
             }
-            s3.isTypeOf[Stream[(String, Int)]]
+            s3.isTypeOf[LazyList[(String, Int)]]
             s3 shouldBe Seq("a" -> 1, "c" -> 9, "d" -> 16)
             called shouldBe Seq("a", "a", "b", "c", "c", "d", "d", "e")
           }
@@ -286,7 +287,8 @@ class ImplicitsSpec extends AnyFunSpec
             }
 
             locally {
-              val s1 = Vector("a" -> 1, "b" -> 2, "c" -> 3, "d" -> 4).toIterable
+              val s1: Iterable[(String, Int)] =
+                Vector("a" -> 1, "b" -> 2, "c" -> 3, "d" -> 4).toIterable
               val s2 = Seq(2 -> 4, 4 -> 16, 1 -> 1, 3 -> 9)
 
               val s3 = s1.join(s2).on(_._2, _._1).into { case (a, b) =>
@@ -298,7 +300,7 @@ class ImplicitsSpec extends AnyFunSpec
           }
         }
 
-        describe("Stream methods") {
+        describe("LazyList methods") {
           it("should join two lists by some key") {
             val s1 = Seq("a" -> 1, "b" -> 2, "c" -> 3, "d" -> 4)
             val s2 = Seq(2 -> 4, 4 -> 16, 1 -> 1, 3 -> 9)
@@ -306,7 +308,7 @@ class ImplicitsSpec extends AnyFunSpec
             val s3 = s1.leftJoin(s2).on(_._2, _._1)(0 -> 0).map { case (a, b) =>
               (a._1, b._2)
             }
-            s3.isTypeOf[Stream[(String, Int)]]
+            s3.isTypeOf[LazyList[(String, Int)]]
             s3 shouldBe Seq("a" -> 1, "b" -> 4, "c" -> 9, "d" -> 16)
           }
 
@@ -317,7 +319,7 @@ class ImplicitsSpec extends AnyFunSpec
             val s3 = s1.leftJoin(s2).on(_._2, _._1)(-1 -> 0).map { case (a, b) =>
               (a._1, b._2)
             }
-            s3.isTypeOf[Stream[(String, Int)]]
+            s3.isTypeOf[LazyList[(String, Int)]]
             s3 shouldBe Seq("a" -> 1, "b" -> 0, "c" -> 9, "d" -> 16, "e" -> 0)
           }
 
@@ -328,7 +330,7 @@ class ImplicitsSpec extends AnyFunSpec
             val s3 = s1.leftJoin(s2).on(_._2, _._1)(x => x -> x * 2).map { case (a, b) =>
               (a._1, b._2)
             }
-            s3.isTypeOf[Stream[(String, Int)]]
+            s3.isTypeOf[LazyList[(String, Int)]]
             s3 shouldBe Seq("a" -> 1, "b" -> 4, "c" -> 9, "d" -> 16, "e" -> 10)
           }
 
@@ -345,7 +347,7 @@ class ImplicitsSpec extends AnyFunSpec
               called += a._1
               (a._1, b._2)
             }
-            s3.isTypeOf[Stream[(String, Int)]]
+            s3.isTypeOf[LazyList[(String, Int)]]
             s3 shouldBe Seq("a" -> 1, "b" -> 4, "c" -> 9, "d" -> 16, "e" -> 10)
             called shouldBe Seq("a", "a", "b", "b", "c", "c", "d", "d", "e", "e")
           }
@@ -413,9 +415,9 @@ class ImplicitsSpec extends AnyFunSpec
           }
         }
 
-        describe("for Stream[]") {
+        describe("for LazyList[]") {
           it("should split a list of Either[]") {
-            val stream: Stream[Either[Int, String]] = Stream(
+            val stream: LazyList[Either[Int, String]] = LazyList(
               Left(1),
               Right("foo"),
               Right("bar"),
@@ -426,10 +428,10 @@ class ImplicitsSpec extends AnyFunSpec
             )
 
             val (left, right) = stream.split
-            left shouldBe a[Stream[_]]
-            right shouldBe a[Stream[_]]
-            left shouldBe Stream(1, 2, 3)
-            right shouldBe Stream("foo", "bar", "baz", "qux")
+            left shouldBe a[LazyList[_]]
+            right shouldBe a[LazyList[_]]
+            left shouldBe LazyList(1, 2, 3)
+            right shouldBe LazyList("foo", "bar", "baz", "qux")
           }
         }
 
