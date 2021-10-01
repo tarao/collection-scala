@@ -188,6 +188,10 @@ object Implicits {
     def leftJoin[B](other: Iterable[B]): Join.Left[A, B, It] =
       new Join.Left(it, other)
 
+    /** Split list of disjunctions into a pair of left list and right list.
+      *
+      * @return a pair of left list and right list.
+      */
     def split[L, R, C](implicit
       eitherOf: A <:< Either[L, R],
       bfl: BuildFrom[It[A], L, It[L]],
