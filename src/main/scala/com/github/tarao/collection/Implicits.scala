@@ -60,7 +60,7 @@ object Implicits {
       *   // res0: Vector[(String, Int)] = Vector((d,4), (a,1), (c,3))
       * }}}
       */
-    def orderBy[B](ordered: Seq[B])(implicit keyOf: A => B): Stream[A] =
+    def orderBy[B](ordered: Seq[B])(implicit keyOf: A => B): LazyList[A] =
       ordered.join(it.toIterable).on(identity(_), keyOf).map(_._2)
 
     /** Reorder this sequence according to another sequence and a mapping
@@ -92,7 +92,7 @@ object Implicits {
       *   // res0: Vector[(String, Int)] = Vector((d,4), (_,5), (a,1), (c,3))
       * }}}
       */
-    def totallyOrderBy[B](ordered: Seq[B])(default: B => A)(implicit keyOf: A => B): Stream[A] =
+    def totallyOrderBy[B](ordered: Seq[B])(default: B => A)(implicit keyOf: A => B): LazyList[A] =
       ordered.leftJoin(it.toIterable).on(identity, keyOf)(default).map(_._2)
 
     /** Make (inner) join of this sequence and another sequence.
@@ -130,11 +130,11 @@ object Implicits {
       *   }
       *
       *   locally {
-      *     // You can call any `Stream` method on the result:
+      *     // You can call any `LazyList` method on the result:
       *     val s = s1.join(s2).on(_._2, _._1).map { case (a, b) =>
       *       s"\${a._1}:\${b._2}"
       *     }
-      *     // s: scala.collection.immutable.Stream[String] = Stream(a:1, ?)
+      *     // s: scala.collection.immutable.LazyList[String] = LazyList(a:1, ?)
       *   }
       * }}}
       */
@@ -177,11 +177,11 @@ object Implicits {
       *   }
       *
       *   locally {
-      *     // You can call any `Stream` method on the result:
+      *     // You can call any `LazyList` method on the result:
       *     val s = s1.leftJoin(s2).on(_._2, _._1)(0 -> 0).map { case (a, b) =>
       *       s"\${a._1}:\${b._2}"
       *     }
-      *     // s: scala.collection.immutable.Stream[String] = Stream(a:1, ?)
+      *     // s: scala.collection.immutable.LazyList[String] = LazyList(a:1, ?)
       *   }
       * }}}
       */

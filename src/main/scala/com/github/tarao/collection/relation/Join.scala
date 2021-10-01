@@ -35,7 +35,8 @@ case class Join[A, B, K, It[X] <: IterableLike[X, It, It[X]]](
   def result(implicit bf: CanBuildFrom[It[A], R, It[R]]): It[R] =
     applyTo(identity, left)
 
-  def toStream: Stream[R] = applyTo(identity, left.toStream)
+  def toLazyList: LazyList[R] = applyTo(identity, left.convertTo(LazyList))
+  def toStream: LazyList[R] = toLazyList
 }
 object Join {
   class Inner[A, B, It[X] <: IterableLike[X, It, It[X]]](
@@ -75,7 +76,7 @@ object Join {
     }
   }
 
-  implicit def toStream[A, B, K, It[X] <: IterableLike[X, It, It[X]]](
+  implicit def toLazyList[A, B, K, It[X] <: IterableLike[X, It, It[X]]](
     join: Join[A, B, K, It]
-  ): Stream[(A, B)] = join.toStream
+  ): LazyList[(A, B)] = join.toLazyList
 }
