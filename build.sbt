@@ -6,7 +6,7 @@ lazy val taraocollection = (project in file(".")).
     name := "collection",
     organization := "com.github.tarao",
     version := "0.0.1-SNAPSHOT",
-    scalaVersion := "2.13.6",
+    scalaVersion := "2.13.8",
     crossScalaVersions := Seq("2.13.6", "2.12.15"),
 
     // Depenency
