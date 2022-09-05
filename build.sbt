@@ -1,13 +1,15 @@
 import sbt._
 import Keys._
 
+val primaryScalaVersion = "2.13.8"
+
 lazy val taraocollection = (project in file(".")).
   settings(
     name := "collection",
     organization := "com.github.tarao",
     version := "0.0.1-SNAPSHOT",
-    scalaVersion := "2.13.6",
-    crossScalaVersions := Seq("2.13.6", "2.12.15"),
+    scalaVersion := primaryScalaVersion,
+    crossScalaVersions := Seq(primaryScalaVersion, "2.12.16"),
 
     // Depenency
     libraryDependencies ++= Seq(
@@ -23,7 +25,7 @@ lazy val taraocollection = (project in file(".")).
     ),
 
     // Documentation
-    scalacOptions in (Compile, doc) ++= Seq(
+    Compile / doc / scalacOptions ++= Seq(
       "-sourcepath", baseDirectory.value.getAbsolutePath,
       "-doc-source-url", "https://github.com/tarao/collection-scala/blob/master€{FILE_PATH}.scala",
       "-implicits",

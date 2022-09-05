@@ -61,7 +61,7 @@ object Implicits {
       * }}}
       */
     def orderBy[B](ordered: Seq[B])(implicit keyOf: A => B): LazyList[A] =
-      ordered.join(it.toIterable).on(identity(_), keyOf).map(_._2)
+      ordered.join(it.toSeq).on(identity(_), keyOf).map(_._2)
 
     /** Reorder this sequence according to another sequence and a mapping
       * of element types.
@@ -93,7 +93,7 @@ object Implicits {
       * }}}
       */
     def totallyOrderBy[B](ordered: Seq[B])(default: B => A)(implicit keyOf: A => B): LazyList[A] =
-      ordered.leftJoin(it.toIterable).on(identity, keyOf)(default).map(_._2)
+      ordered.leftJoin(it.toSeq).on(identity, keyOf)(default).map(_._2)
 
     /** Make (inner) join of this sequence and another sequence.
       *

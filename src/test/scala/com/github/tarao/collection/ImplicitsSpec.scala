@@ -156,7 +156,7 @@ class ImplicitsSpec extends AnyFunSpec
 
             locally {
               val s1: Iterable[(String, Int)] =
-                Vector("a" -> 1, "b" -> 2, "c" -> 3, "d" -> 4).toIterable
+                Vector("a" -> 1, "b" -> 2, "c" -> 3, "d" -> 4).toSeq
               val s2 = Seq(2 -> 4, 4 -> 16, 1 -> 1, 3 -> 9)
 
               val s3 = s1.join(s2).on(_._2, _._1).into { case (a, b) =>
@@ -288,7 +288,7 @@ class ImplicitsSpec extends AnyFunSpec
 
             locally {
               val s1: Iterable[(String, Int)] =
-                Vector("a" -> 1, "b" -> 2, "c" -> 3, "d" -> 4).toIterable
+                Vector("a" -> 1, "b" -> 2, "c" -> 3, "d" -> 4).toSeq
               val s2 = Seq(2 -> 4, 4 -> 16, 1 -> 1, 3 -> 9)
 
               val s3 = s1.join(s2).on(_._2, _._1).into { case (a, b) =>
