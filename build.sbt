@@ -9,7 +9,7 @@ lazy val taraocollection = (project in file(".")).
     organization := "com.github.tarao",
     version := "0.0.1-SNAPSHOT",
     scalaVersion := primaryScalaVersion,
-    crossScalaVersions := Seq(primaryScalaVersion, "2.12.15"),
+    crossScalaVersions := Seq(primaryScalaVersion, "2.12.16"),
 
     // Depenency
     libraryDependencies ++= Seq(
