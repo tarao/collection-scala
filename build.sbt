@@ -25,7 +25,7 @@ lazy val taraocollection = (project in file(".")).
     ),
 
     // Documentation
-    scalacOptions in (Compile, doc) ++= Seq(
+    Compile / doc / scalacOptions ++= Seq(
       "-sourcepath", baseDirectory.value.getAbsolutePath,
       "-doc-source-url", "https://github.com/tarao/collection-scala/blob/master€{FILE_PATH}.scala",
       "-implicits",
