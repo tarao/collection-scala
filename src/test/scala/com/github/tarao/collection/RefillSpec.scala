@@ -409,6 +409,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(5) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("foo1", 999999),
             Item("bar1", 988888),
@@ -429,6 +430,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(6) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("foo1", 999999),
             Item("bar1", 988888),
@@ -460,6 +462,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(3) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("foo1", 999999),
             Item("bar1", 988888),
@@ -475,6 +478,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(2) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("foo1", 999999),
             Item("bar1", 988888),
@@ -490,6 +494,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(2) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(6)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("foo1", 999999),
             Item("bar1", 988888),
@@ -506,6 +511,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(5) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(20)
+
           (s.toVector, next) shouldBe ((dataSet, 0))
           example.called shouldBe 4
         }
@@ -515,6 +521,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(5) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(25)
+
           (s.toVector, next) shouldBe ((dataSet, 0))
           example.called shouldBe 4
         }
@@ -524,6 +531,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(6) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(20)
+
           (s.toVector, next) shouldBe ((dataSet, 0))
           example.called shouldBe 4
         }
@@ -533,6 +541,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(6) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(25)
+
           (s.toVector, next) shouldBe ((dataSet, 0))
           example.called shouldBe 4
         }
@@ -542,6 +551,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(20) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(20)
+
           (s.toVector, next) shouldBe ((dataSet, 0))
           example.called shouldBe 1
         }
@@ -551,6 +561,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(25) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(20)
+
           (s.toVector, next) shouldBe ((dataSet, 0))
           example.called shouldBe 1
         }
@@ -560,6 +571,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(20) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(25)
+
           (s.toVector, next) shouldBe ((dataSet, 0))
           example.called shouldBe 1
         }
@@ -569,6 +581,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(25) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(25)
+
           (s.toVector, next) shouldBe ((dataSet, 0))
           example.called shouldBe 1
         }
@@ -580,6 +593,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(3)).chunked(5) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("qux1", 966666),
             Item("foo2", 899999),
@@ -600,6 +614,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(3)).chunked(6) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("qux1", 966666),
             Item("foo2", 899999),
@@ -631,6 +646,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(3)).chunked(3) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("qux1", 966666),
             Item("foo2", 899999),
@@ -646,6 +662,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(3)).chunked(2) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("qux1", 966666),
             Item("foo2", 899999),
@@ -661,6 +678,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(3)).chunked(2) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(6)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("qux1", 966666),
             Item("foo2", 899999),
@@ -677,7 +695,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(5) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(15)
-            (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
+
+          (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
           example.called shouldBe 3
         }
 
@@ -686,7 +705,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(5) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(25)
-            (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
+
+          (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
           example.called shouldBe 3
         }
 
@@ -695,7 +715,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(6) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(15)
-            (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
+
+          (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
           example.called shouldBe 3
         }
 
@@ -704,7 +725,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(6) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(25)
-            (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
+
+          (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
           example.called shouldBe 3
         }
 
@@ -713,7 +735,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(15) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(15)
-            (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
+
+          (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
           example.called shouldBe 1
         }
 
@@ -722,7 +745,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(20) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(15)
-            (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
+
+          (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
           example.called shouldBe 1
         }
 
@@ -731,16 +755,19 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(15) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(20)
-            (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
+
+          (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
           example.called shouldBe 1
         }
 
         locally {
           val example = new RefillExample
           val (s, next) = Refill.from(Offset(5)).chunked(20) { (limit, cursor) =>
+
             example.findAll(limit, cursor)
           }.takeWithNextCursor(20)
-            (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
+
+          (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
           example.called shouldBe 1
         }
       }
@@ -1075,6 +1102,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(5) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar1", 988888),
             Item("baz1", 977777),
@@ -1090,6 +1118,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(6) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar1", 988888),
             Item("baz1", 977777),
@@ -1105,6 +1134,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(7) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar1", 988888),
             Item("baz1", 977777),
@@ -1120,6 +1150,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(3) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar1", 988888),
             Item("baz1", 977777),
@@ -1135,6 +1166,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(2) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar1", 988888),
             Item("baz1", 977777),
@@ -1150,6 +1182,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(2) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(6)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar1", 988888),
             Item("baz1", 977777),
@@ -1166,6 +1199,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(5) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(10)
+
           (s.toVector, next) shouldBe ((dataSetBa, 0))
           example.called shouldBe 4
         }
@@ -1175,6 +1209,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(5) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(15)
+
           (s.toVector, next) shouldBe ((dataSetBa, 0))
           example.called shouldBe 4
         }
@@ -1184,6 +1219,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(6) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(10)
+
           (s.toVector, next) shouldBe ((dataSetBa, 0))
           example.called shouldBe 4
         }
@@ -1193,7 +1229,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(6) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(8)
-            (s.toVector, next) shouldBe ((dataSetBa.dropRight(2), 17))
+
+          (s.toVector, next) shouldBe ((dataSetBa.dropRight(2), 17))
           example.called shouldBe 3
         }
 
@@ -1202,6 +1239,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(6) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(15)
+
           (s.toVector, next) shouldBe ((dataSetBa, 0))
           example.called shouldBe 4
         }
@@ -1211,6 +1249,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(20) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(10)
+
           (s.toVector, next) shouldBe ((dataSetBa, 0))
           example.called shouldBe 1
         }
@@ -1220,6 +1259,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(20) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(15)
+
           (s.toVector, next) shouldBe ((dataSetBa, 0))
           example.called shouldBe 1
         }
@@ -1229,6 +1269,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(25) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(10)
+
           (s.toVector, next) shouldBe ((dataSetBa, 0))
           example.called shouldBe 1
         }
@@ -1238,6 +1279,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)).chunked(25) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(15)
+
           (s.toVector, next) shouldBe ((dataSetBa, 0))
           example.called shouldBe 1
         }
@@ -1251,6 +1293,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(3)).chunked(5) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar2", 888888),
             Item("baz2", 877777),
@@ -1266,6 +1309,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(3)).chunked(6) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar2", 888888),
             Item("baz2", 877777),
@@ -1281,6 +1325,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(3)).chunked(7) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar2", 888888),
             Item("baz2", 877777),
@@ -1296,6 +1341,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(3)).chunked(3) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar2", 888888),
             Item("baz2", 877777),
@@ -1311,6 +1357,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(3)).chunked(2) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar2", 888888),
             Item("baz2", 877777),
@@ -1326,6 +1373,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(3)).chunked(2) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(6)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar2", 888888),
             Item("baz2", 877777),
@@ -1342,7 +1390,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(5) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(8)
-            (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
+
+          (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
           example.called shouldBe 3
         }
 
@@ -1351,7 +1400,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(5) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(12)
-            (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
+
+          (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
           example.called shouldBe 3
         }
 
@@ -1360,7 +1410,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(6) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(8)
-            (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
+
+          (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
           example.called shouldBe 3
         }
 
@@ -1369,7 +1420,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(6) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(12)
-            (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
+
+          (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
           example.called shouldBe 3
         }
 
@@ -1378,7 +1430,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(20) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(8)
-            (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
+
+          (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
           example.called shouldBe 1
         }
 
@@ -1387,7 +1440,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(25) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(8)
-            (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
+
+          (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
           example.called shouldBe 1
         }
 
@@ -1396,7 +1450,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(20) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(12)
-            (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
+
+          (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
           example.called shouldBe 1
         }
 
@@ -1405,7 +1460,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)).chunked(25) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(12)
-            (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
+
+          (s.toVector, next) shouldBe ((dataSetBa.drop(2), 0))
           example.called shouldBe 1
         }
       }
@@ -1433,6 +1489,7 @@ class RefillSpec extends AnyFunSpec
         val s = Refill.from(Offset(0)).chunked(2) { (lim, cur) =>
           testData.drop(cur).take(lim)
         }.distinct.take(4)
+
         s.toVector shouldBe Vector(1, 4, 2, 3)
       }
     }
@@ -1454,6 +1511,7 @@ class RefillSpec extends AnyFunSpec
         val s = Refill.from(Offset(0)).chunked(2) { (lim, cur) =>
           testData.drop(cur).take(lim)
         }.distinctBy(_._2).take(4)
+
         // - Prefers first element
         // - Fetch needed amount when insufficient elements after
         //   deduplication
@@ -1473,6 +1531,7 @@ class RefillSpec extends AnyFunSpec
         val s = Refill.from(Offset(0)).chunked(2) { (lim, cur) =>
           testData.drop(cur).take(lim)
         }.drop(3).take(4)
+
         s.toVector shouldBe Vector(4, 2, 1, 3)
       }
     }
@@ -1484,6 +1543,7 @@ class RefillSpec extends AnyFunSpec
         val s = Refill.from(Offset(0)).chunked(2) { (lim, cur) =>
           testData.drop(cur).take(lim)
         }.dropRight(6).take(4)
+
         s.toVector shouldBe Vector(1, 4, 1)
       }
     }
@@ -1495,6 +1555,7 @@ class RefillSpec extends AnyFunSpec
         val s = Refill.from(Offset(0)).chunked(2) { (lim, cur) =>
           testData.drop(cur).take(lim)
         }.dropWhile(x => x == 1 || x == 4).take(4)
+
         s.toVector shouldBe Vector(2, 1, 3, 5)
       }
     }
@@ -1506,6 +1567,7 @@ class RefillSpec extends AnyFunSpec
         val s = Refill.from(Offset(0)).chunked(2) { (lim, cur) =>
           testData.drop(cur).take(lim)
         }.filterNot(x => x == 1 || x == 4).take(4)
+
         s.toVector shouldBe Vector(2, 3, 5, 6)
       }
     }
@@ -1517,6 +1579,7 @@ class RefillSpec extends AnyFunSpec
         val s = Refill.from(Offset(0)).chunked(2) { (lim, cur) =>
           testData.drop(cur).take(lim)
         }.map(n => n * n).take(4)
+
         s.toVector shouldBe Vector(1, 16, 1, 16)
       }
     }
@@ -1650,6 +1713,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(999999))(toTimestamp)).chunked(5) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.takeWithNextCursor(25)
+
           (s.toVector, next) shouldBe ((dataSet, None))
           example.called shouldBe 4
         }
@@ -1659,6 +1723,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(999999))(toTimestamp)).chunked(5) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.takeWithNextCursor(20)
+
           (s.toVector, next) shouldBe ((dataSet, None))
           example.called shouldBe 4
         }
@@ -1668,6 +1733,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(999999))(toTimestamp)).chunked(5) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("foo1", 999999),
             Item("bar1", 988888),
@@ -1683,6 +1749,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(9999999))(toTimestamp)).chunked(5) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("foo1", 999999),
             Item("bar1", 988888),
@@ -1698,6 +1765,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(999999))(toTimestamp)).chunked(6) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("foo1", 999999),
             Item("bar1", 988888),
@@ -1713,6 +1781,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(999999))(toTimestamp)).chunked(3) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("foo1", 999999),
             Item("bar1", 988888),
@@ -1728,6 +1797,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(888888))(toTimestamp)).chunked(5) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar2", 888888),
             Item("baz2", 877777),
@@ -1743,6 +1813,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(889999))(toTimestamp)).chunked(5) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar2", 888888),
             Item("baz2", 877777),
@@ -1758,6 +1829,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(888888))(toTimestamp)).chunked(6) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar2", 888888),
             Item("baz2", 877777),
@@ -1773,6 +1845,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(888888))(toTimestamp)).chunked(3) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar2", 888888),
             Item("baz2", 877777),
@@ -1912,6 +1985,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(999999))(toTimestamp)).chunked(5) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.filter(_.name.startsWith("bar")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar1", 988888),
             Item("bar2", 888888),
@@ -1927,6 +2001,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(999999))(toTimestamp)).chunked(5) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.filter(_.name.startsWith("bar")).takeWithNextCursor(6)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar1", 988888),
             Item("bar2", 888888),
@@ -1942,6 +2017,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(999999))(toTimestamp)).chunked(5) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar1", 988888),
             Item("baz1", 977777),
@@ -1957,6 +2033,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(9999999))(toTimestamp)).chunked(5) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar1", 988888),
             Item("baz1", 977777),
@@ -1972,6 +2049,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(999999))(toTimestamp)).chunked(6) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar1", 988888),
             Item("baz1", 977777),
@@ -1987,6 +2065,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(999999))(toTimestamp)).chunked(3) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar1", 988888),
             Item("baz1", 977777),
@@ -2002,6 +2081,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(888888))(toTimestamp)).chunked(5) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar2", 888888),
             Item("baz2", 877777),
@@ -2017,6 +2097,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(889999))(toTimestamp)).chunked(5) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar2", 888888),
             Item("baz2", 877777),
@@ -2032,6 +2113,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(888888))(toTimestamp)).chunked(10) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar2", 888888),
             Item("baz2", 877777),
@@ -2047,6 +2129,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(888888))(toTimestamp)).chunked(3) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.filter(_.name.startsWith("ba")).takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("bar2", 888888),
             Item("baz2", 877777),
@@ -2063,7 +2146,7 @@ class RefillSpec extends AnyFunSpec
       val testData = Seq(1, 4, 1, 4, 2, 1, 3, 5, 6).zipWithIndex
 
       it("should collect matched items") {
-        val cursor = Cursor(Some(0)) { elem: (Int, Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: (Int, Int)) => elem._2 }
         val s = Refill.from(cursor).chunked(2) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value).take(lim)
         }.collect {
@@ -2079,10 +2162,11 @@ class RefillSpec extends AnyFunSpec
       val testData = Seq(1, 4, 1, 4, 2, 1, 3, 5, 6).zipWithIndex
 
       it("should remove duplication") {
-        val cursor = Cursor(Some(0)) { elem: (Int, Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: (Int, Int)) => elem._2 }
         val s = Refill.from(cursor).chunked(2) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value).take(lim)
         }.map(_._1).distinct.take(4)
+
         s.toVector shouldBe Vector(1, 4, 2, 3)
       }
     }
@@ -2101,10 +2185,11 @@ class RefillSpec extends AnyFunSpec
       ).zipWithIndex
 
       it("should remove duplication") {
-        val cursor = Cursor(Some(0)) { elem: ((Int, Int), Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: ((Int, Int), Int)) => elem._2 }
         val s = Refill.from(cursor).chunked(2) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value)
         }.distinctBy(_._1._2).take(4).map(_._1)
+
         // - Prefers first element
         // - Fetch needed amount when insufficient elements after
         //   deduplication
@@ -2121,10 +2206,11 @@ class RefillSpec extends AnyFunSpec
       val testData = Seq(1, 4, 1, 4, 2, 1, 3, 5, 6).zipWithIndex
 
       it("should remove first items") {
-        val cursor = Cursor(Some(0)) { elem: (Int, Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: (Int, Int)) => elem._2 }
         val s = Refill.from(cursor).chunked(2) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value).take(lim)
         }.drop(3).take(4).map(_._1)
+
         s.toVector shouldBe Vector(4, 2, 1, 3)
       }
     }
@@ -2133,10 +2219,11 @@ class RefillSpec extends AnyFunSpec
       val testData = Seq(1, 4, 1, 4, 2, 1, 3, 5, 6).zipWithIndex
 
       it("should remove last items") {
-        val cursor = Cursor(Some(0)) { elem: (Int, Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: (Int, Int)) => elem._2 }
         val s = Refill.from(cursor).chunked(2) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value).take(lim)
         }.dropRight(6).take(4).map(_._1)
+
         s.toVector shouldBe Vector(1, 4, 1)
       }
     }
@@ -2145,10 +2232,11 @@ class RefillSpec extends AnyFunSpec
       val testData = Seq(1, 4, 1, 4, 2, 1, 3, 5, 6).zipWithIndex
 
       it("should remove first items matching the condition") {
-        val cursor = Cursor(Some(0)) { elem: (Int, Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: (Int, Int)) => elem._2 }
         val s = Refill.from(cursor).chunked(2) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value).take(lim)
         }.map(_._1).dropWhile(x => x == 1 || x == 4).take(4)
+
         s.toVector shouldBe Vector(2, 1, 3, 5)
       }
     }
@@ -2157,10 +2245,11 @@ class RefillSpec extends AnyFunSpec
       val testData = Seq(1, 4, 1, 4, 2, 1, 3, 5, 6).zipWithIndex
 
       it("should remove items that do not match the condition") {
-        val cursor = Cursor(Some(0)) { elem: (Int, Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: (Int, Int)) => elem._2 }
         val s = Refill.from(cursor).chunked(2) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value).take(lim)
         }.map(_._1).filterNot(x => x == 1 || x == 4).take(4)
+
         s.toVector shouldBe Vector(2, 3, 5, 6)
       }
     }
@@ -2169,10 +2258,11 @@ class RefillSpec extends AnyFunSpec
       val testData = Seq(1, 4, 1, 4, 2, 1, 3, 5, 6).zipWithIndex
 
       it("should map items") {
-        val cursor = Cursor(Some(0)) { elem: (Int, Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: (Int, Int)) => elem._2 }
         val s = Refill.from(cursor).chunked(2) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value).take(lim)
         }.map { case (n, _) => n * n }.take(4)
+
         s.toVector shouldBe Vector(1, 16, 1, 16)
       }
     }
@@ -2294,6 +2384,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("foo1", 999999),
             Item("bar1", 988888),
@@ -2309,6 +2400,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(6)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("foo1", 999999),
             Item("bar1", 988888),
@@ -2325,6 +2417,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(20)
+
           (s.toVector, next) shouldBe ((dataSet, 0))
           example.called shouldBe 1
         }
@@ -2334,6 +2427,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(25)
+
           (s.toVector, next) shouldBe ((dataSet, 0))
           example.called shouldBe 1
         }
@@ -2345,6 +2439,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(3)) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("qux1", 966666),
             Item("foo2", 899999),
@@ -2360,6 +2455,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(3)) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(6)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("qux1", 966666),
             Item("foo2", 899999),
@@ -2376,7 +2472,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(15)
-            (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
+
+          (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
           example.called shouldBe 1
         }
 
@@ -2385,7 +2482,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(25)
-            (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
+
+          (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
           example.called shouldBe 1
         }
 
@@ -2394,7 +2492,8 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(5)) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.takeWithNextCursor(15)
-            (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
+
+          (s.toVector, next) shouldBe ((dataSet.drop(5), 0))
           example.called shouldBe 1
         }
       }
@@ -2445,6 +2544,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(0)) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name != "qux1").takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("foo1", 999999),
             Item("bar1", 988888),
@@ -2462,6 +2562,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Offset(3)) { (limit, cursor) =>
             example.findAll(limit, cursor)
           }.filter(_.name != "qux1").takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("foo2", 899999),
             Item("bar2", 888888),
@@ -2496,6 +2597,7 @@ class RefillSpec extends AnyFunSpec
         val s = Refill.from(Offset(0)) { (lim, cur) =>
           testData.drop(cur).take(lim)
         }.distinct.take(4)
+
         s.toVector shouldBe Vector(1, 4, 2, 3)
       }
     }
@@ -2517,6 +2619,7 @@ class RefillSpec extends AnyFunSpec
         val s = Refill.from(Offset(0)) { (lim, cur) =>
           testData.drop(cur).take(lim)
         }.distinctBy(_._2).take(4)
+
         // - Prefers first element
         // - Fetch needed amount when insufficient elements after
         //   deduplication
@@ -2536,6 +2639,7 @@ class RefillSpec extends AnyFunSpec
         val s = Refill.from(Offset(0)) { (lim, cur) =>
           testData.drop(cur).take(lim)
         }.drop(3).take(4)
+
         s.toVector shouldBe Vector(4, 2, 1, 3)
       }
     }
@@ -2547,6 +2651,7 @@ class RefillSpec extends AnyFunSpec
         val s = Refill.from(Offset(0)) { (lim, cur) =>
           testData.drop(cur).take(lim)
         }.dropRight(6).take(4)
+
         s.toVector shouldBe Vector(1, 4, 1)
       }
     }
@@ -2558,6 +2663,7 @@ class RefillSpec extends AnyFunSpec
         val s = Refill.from(Offset(0)) { (lim, cur) =>
           testData.drop(cur).take(lim)
         }.dropWhile(x => x == 1 || x == 4).take(4)
+
         s.toVector shouldBe Vector(2, 1, 3, 5)
       }
     }
@@ -2569,6 +2675,7 @@ class RefillSpec extends AnyFunSpec
         val s = Refill.from(Offset(0)) { (lim, cur) =>
           testData.drop(cur).take(lim)
         }.filterNot(x => x == 1 || x == 4).take(4)
+
         s.toVector shouldBe Vector(2, 3, 5, 6)
       }
     }
@@ -2580,6 +2687,7 @@ class RefillSpec extends AnyFunSpec
         val s = Refill.from(Offset(0)) { (lim, cur) =>
           testData.drop(cur).take(lim)
         }.map(n => n * n).take(4)
+
         s.toVector shouldBe Vector(1, 16, 1, 16)
       }
     }
@@ -2615,6 +2723,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(999999))(toTimestamp)) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.takeWithNextCursor(25)
+
           (s.toVector, next) shouldBe ((dataSet, None))
           example.called shouldBe 1
         }
@@ -2624,6 +2733,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(999999))(toTimestamp)) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.takeWithNextCursor(20)
+
           (s.toVector, next) shouldBe ((dataSet, None))
           example.called shouldBe 1
         }
@@ -2659,6 +2769,7 @@ class RefillSpec extends AnyFunSpec
           val (s, next) = Refill.from(Cursor(Some(977777))(toTimestamp)) { (limit, cursor) =>
             example.findAllByTimestamp(limit, cursor)
           }.filter(_.name != "qux1").takeWithNextCursor(5)
+
           (s.toVector, next) shouldBe ((Vector(
             Item("baz1", 977777),
             Item("foo2", 899999),
@@ -2675,7 +2786,7 @@ class RefillSpec extends AnyFunSpec
       val testData = Seq(1, 4, 1, 4, 2, 1, 3, 5, 6).zipWithIndex
 
       it("should collect matched items") {
-        val cursor = Cursor(Some(0)) { elem: (Int, Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: (Int, Int)) => elem._2 }
         val s = Refill.from(cursor) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value).take(lim)
         }.collect {
@@ -2691,10 +2802,11 @@ class RefillSpec extends AnyFunSpec
       val testData = Seq(1, 4, 1, 4, 2, 1, 3, 5, 6).zipWithIndex
 
       it("should remove duplication") {
-        val cursor = Cursor(Some(0)) { elem: (Int, Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: (Int, Int)) => elem._2 }
         val s = Refill.from(cursor) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value).take(lim)
         }.map(_._1).distinct.take(4)
+
         s.toVector shouldBe Vector(1, 4, 2, 3)
       }
     }
@@ -2713,10 +2825,11 @@ class RefillSpec extends AnyFunSpec
       ).zipWithIndex
 
       it("should remove duplication") {
-        val cursor = Cursor(Some(0)) { elem: ((Int, Int), Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: ((Int, Int), Int)) => elem._2 }
         val s = Refill.from(cursor) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value)
         }.distinctBy(_._1._2).take(4).map(_._1)
+
         // - Prefers first element
         // - Fetch needed amount when insufficient elements after
         //   deduplication
@@ -2733,10 +2846,11 @@ class RefillSpec extends AnyFunSpec
       val testData = Seq(1, 4, 1, 4, 2, 1, 3, 5, 6).zipWithIndex
 
       it("should remove first items") {
-        val cursor = Cursor(Some(0)) { elem: (Int, Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: (Int, Int)) => elem._2 }
         val s = Refill.from(cursor) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value).take(lim)
         }.drop(3).take(4).map(_._1)
+
         s.toVector shouldBe Vector(4, 2, 1, 3)
       }
     }
@@ -2745,10 +2859,11 @@ class RefillSpec extends AnyFunSpec
       val testData = Seq(1, 4, 1, 4, 2, 1, 3, 5, 6).zipWithIndex
 
       it("should remove last items") {
-        val cursor = Cursor(Some(0)) { elem: (Int, Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: (Int, Int)) => elem._2 }
         val s = Refill.from(cursor) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value).take(lim)
         }.dropRight(6).take(4).map(_._1)
+
         s.toVector shouldBe Vector(1, 4, 1)
       }
     }
@@ -2757,10 +2872,11 @@ class RefillSpec extends AnyFunSpec
       val testData = Seq(1, 4, 1, 4, 2, 1, 3, 5, 6).zipWithIndex
 
       it("should remove first items matching the condition") {
-        val cursor = Cursor(Some(0)) { elem: (Int, Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: (Int, Int)) => elem._2 }
         val s = Refill.from(cursor) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value).take(lim)
         }.map(_._1).dropWhile(x => x == 1 || x == 4).take(4)
+
         s.toVector shouldBe Vector(2, 1, 3, 5)
       }
     }
@@ -2769,10 +2885,11 @@ class RefillSpec extends AnyFunSpec
       val testData = Seq(1, 4, 1, 4, 2, 1, 3, 5, 6).zipWithIndex
 
       it("should remove items that do not match the condition") {
-        val cursor = Cursor(Some(0)) { elem: (Int, Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: (Int, Int)) => elem._2 }
         val s = Refill.from(cursor) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value).take(lim)
         }.map(_._1).filterNot(x => x == 1 || x == 4).take(4)
+
         s.toVector shouldBe Vector(2, 3, 5, 6)
       }
     }
@@ -2781,10 +2898,11 @@ class RefillSpec extends AnyFunSpec
       val testData = Seq(1, 4, 1, 4, 2, 1, 3, 5, 6).zipWithIndex
 
       it("should map items") {
-        val cursor = Cursor(Some(0)) { elem: (Int, Int) => elem._2 }
+        val cursor = Cursor(Some(0)) { (elem: (Int, Int)) => elem._2 }
         val s = Refill.from(cursor) { (lim, cur) =>
           testData.dropWhile(_._2 != cur.value).take(lim)
         }.map { case (n, _) => n * n }.take(4)
+
         s.toVector shouldBe Vector(1, 16, 1, 16)
       }
     }
