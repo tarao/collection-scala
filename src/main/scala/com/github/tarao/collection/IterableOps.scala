@@ -181,7 +181,7 @@ private[collection] trait IterableOps[A, It[X] <: IterableLike[X, It, It[X]]] ex
     *
     * @return a pair of left list and right list.
     */
-  def split[L, R, C](implicit
+  def split[L, R](implicit
     eitherOf: A <:< Either[L, R],
     bfl: BuildFrom[It[A], L, It[L]],
     bfr: BuildFrom[It[A], R, It[R]],
