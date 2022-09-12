@@ -1,7 +1,7 @@
 package com.github.tarao
 package collection
 
-import collection.Implicits.IterableOps
+import collection.Implicits.iterableOps
 
 /** A utility to retrieve some amount of elements with refilling to
   * reach the total amount even if some of them are dropped.

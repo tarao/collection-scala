@@ -1,7 +1,11 @@
 import sbt._
 import Keys._
 
-val primaryScalaVersion = "2.13.8"
+val scala212 = "2.12.16"
+val scala213 = "2.13.8"
+val scala3 = "3.2.0"
+val primaryScalaVersion = scala213
+val supportedScalaVersions = Seq(scala3, scala213, scala212)
 
 lazy val taraocollection = (project in file(".")).
   settings(
@@ -9,7 +13,7 @@ lazy val taraocollection = (project in file(".")).
     organization := "com.github.tarao",
     version := "0.0.1-SNAPSHOT",
     scalaVersion := primaryScalaVersion,
-    crossScalaVersions := Seq(primaryScalaVersion, "2.12.16"),
+    crossScalaVersions := supportedScalaVersions,
 
     // Depenency
     libraryDependencies ++= Seq(

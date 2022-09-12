@@ -10,7 +10,7 @@ class ImplicitsSpec extends AnyFunSpec
     with Matchers with OptionValues with Inside with Inspectors {
   describe("Implicits") {
     describe("IterableOps") {
-      import Implicits.IterableOps
+      import Implicits.iterableOps
 
       describe(".distinctBy") {
         it("should uniquify elements") {
