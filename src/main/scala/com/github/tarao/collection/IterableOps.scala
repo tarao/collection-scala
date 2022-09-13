@@ -7,8 +7,7 @@ import scala.language.higherKinds
 private[collection] trait IterableOps[A, It[X] <: IterableLike[X, It, It[X]]] extends Any {
   protected def it: It[A]
 
-  /** Builds a new sequence from this sequence without any duplications
-    * of mapped elements.
+  /** Builds a new sequence from this sequence without any duplications of mapped elements.
     *
     * @param  f  a mapping whose codomain is used to determine duplication.
     * @return    a new sequence contains the first occurrence of every element of this sequence.
@@ -24,17 +23,14 @@ private[collection] trait IterableOps[A, It[X] <: IterableLike[X, It, It[X]]] ex
     it.filter(elem => seen.add(f(elem)))
   }
 
-  /** Reorder this sequence according to another sequence and a mapping
-    * of element types.
+  /** Reorder this sequence according to another sequence and a mapping of element types.
     *
-    *   The position of an element in this sequence is decided by
-    * the position of an element in the specified sequence which is
-    * mapped from the element in this sequence by the implicitly
-    * specified mapping.  If an element is mapped to no element in
-    * the specified sequence, then the element is eliminated from
-    * the result.  If there is an element in the specified sequence
-    * which has no counterpart in this sequence, then the position
-    * of the element is simply skipped.
+    * The position of an element in this sequence is decided by the position of an element
+    * in the specified sequence which is mapped from the element in this sequence by the
+    * implicitly specified mapping.  If an element is mapped to no element in the
+    * specified sequence, then the element is eliminated from the result.  If there is an
+    * element in the specified sequence which has no counterpart in this sequence, then
+    * the position of the element is simply skipped.
     *
     * @param ordered  a sequence which specifies the order.
     * @param keyOf    an implicit mapping from an element in this
@@ -52,25 +48,21 @@ private[collection] trait IterableOps[A, It[X] <: IterableLike[X, It, It[X]]] ex
   def orderBy[B](ordered: Seq[B])(implicit keyOf: A => B): LazyList[A] =
     new Implicits.IterableOps(ordered).join(it.toSeq).on(identity(_), keyOf).map(_._2)
 
-  /** Reorder this sequence according to another sequence and a mapping
-    * of element types.
+  /** Reorder this sequence according to another sequence and a mapping of element types.
     *
-    * The position of an element in this sequence is decided by the
-    * position of an element in the specified sequence which is
-    * mapped from the element in this sequence by the implicitly
-    * specified mapping.  If an element is mapped to no element in
-    * the specified sequence, then the element is eliminated from
-    * the result.  If there is an element in the specified sequence
-    * which has no counterpart in this sequence, then the position
-    * of the element is filled by a default value.
+    * The position of an element in this sequence is decided by the position of an element
+    * in the specified sequence which is mapped from the element in this sequence by the
+    * implicitly specified mapping.  If an element is mapped to no element in the
+    * specified sequence, then the element is eliminated from the result.  If there is an
+    * element in the specified sequence which has no counterpart in this sequence, then
+    * the position of the element is filled by a default value.
     *
     * @param ordered  a sequence which specifies the order.
-    * @param default  a function to provide a default value.
-    *                 The parameter of the function is an element in
-    *                 `ordered` which has no counterpart in this
+    * @param default  a function to provide a default value.  The parameter of the function
+    *                 is an element in `ordered` which has no counterpart in this
     *                 sequence.
-    * @param keyOf    an implicit mapping from an element in this
-    *                 sequence to an element in `ordered`.
+    * @param keyOf    an implicit mapping from an element in this sequence to an element in
+    *                 `ordered`.
     * @return         a stream whose elements are from this sequence
     *                 and ordered by `ordered`.
     * @see [[IterableOps#orderBy]]
@@ -86,14 +78,12 @@ private[collection] trait IterableOps[A, It[X] <: IterableLike[X, It, It[X]]] ex
 
   /** Make (inner) join of this sequence and another sequence.
     *
-    * Two functions passed to `on()` method on the return value
-    * specifies association of elements in two sequences.  Two
-    * elements are associated if the result of the functions are the
-    * same.  Elements are skipped if there is no association for them.
+    * Two functions passed to `on()` method on the return value specify association of
+    * elements in the two sequences.  Two elements are associated if the result of the
+    * functions are the same.  Elements are skipped if there is no association for them.
     *
-    * The return value of `on()` is an intermediate value to
-    * describe the join.  You have to call `result()`, `into()` or
-    * some stream method to get the result.
+    * The return value of `on()` is an intermediate value to describe the join.  You have
+    * to call `result()`, `into()` or some stream method to get the result.
     *
     * The result sequence preserves the order of this sequence.
     *
@@ -132,15 +122,13 @@ private[collection] trait IterableOps[A, It[X] <: IterableLike[X, It, It[X]]] ex
 
   /** Make left (outer) join of this sequence and another sequence.
     *
-    * Two functions passed to `on()` method on the return value
-    * specifies association of elements in two sequences.  Two
-    * elements are associated if the result of the functions are the
-    * same.  If there is no association in the specified sequence, a
+    * Two functions passed to `on()` method on the return value specify association of
+    * elements in the two sequences.  Two elements are associated if the result of the
+    * functions are the same.  If there is no association in the specified sequence, a
     * default value provided by the argument of `on()` is used.
     *
-    * The return value of `on()` is an intermediate value to
-    * describe the join.  You have to call `result()`, `into()` or
-    * some stream method to get the result.
+    * The return value of `on()` is an intermediate value to describe the join.  You have
+    * to call `result()`, `into()` or some stream method to get the result.
     *
     * The result sequence preserves the order of this sequence.
     *
