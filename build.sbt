@@ -11,7 +11,7 @@ lazy val taraocollection = (project in file(".")).
   settings(
     name := "collection",
     organization := "com.github.tarao",
-    version := "0.0.1-SNAPSHOT",
+    version := "1.0.0",
     scalaVersion := primaryScalaVersion,
     crossScalaVersions := supportedScalaVersions,
 
