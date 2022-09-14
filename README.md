@@ -1,4 +1,4 @@
-tarao's collection utilities in Scala
+tarao's collection utilities in Scala [![Build Status][CI-img]][CI] [![Maven Central][maven-img]][maven]
 =====================================
 
 Provide some extension methods and abstractions for collections (`Iterable`s).
@@ -377,3 +377,8 @@ License
 
 - Copyright (C) INA Lintaro et al.
 - MIT License
+
+[CI]: https://github.com/tarao/collection-scala/actions/workflows/ci.yaml
+[CI-img]: https://github.com/tarao/collection-scala/actions/workflows/ci.yaml/badge.svg
+[maven]: https://search.maven.org/artifact/com.github.tarao/collection_2.13
+[maven-img]: https://maven-badges.herokuapp.com/maven-central/com.github.tarao/collection_2.13/badge.svg
