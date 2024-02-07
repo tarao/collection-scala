@@ -18,7 +18,7 @@ lazy val taraocollection = (project in file(".")).
     // Depenency
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest-funspec" % "3.2.13" % "test",
-      "org.scalatest" %% "scalatest-shouldmatchers" % "3.2.13" % "test",
+      "org.scalatest" %% "scalatest-shouldmatchers" % "3.2.18" % "test",
     ),
 
     // Compilation
